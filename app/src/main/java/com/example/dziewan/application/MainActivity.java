@@ -33,8 +33,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements KonwersjaZdjec {
 
     ImageButton plus, minus, rownosc;
-    ImageView obrazek;
-    Button zaladuj;
+//    ImageView obrazek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +43,7 @@ public class MainActivity extends AppCompatActivity implements KonwersjaZdjec {
         plus = findViewById(R.id.plus);
         minus = findViewById(R.id.minus);
         rownosc = findViewById(R.id.rownosc);
-        obrazek = findViewById(R.id.obrazePlyty);
-        zaladuj = findViewById(R.id.zaladuj);
-
-        zaladuj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getRestResponse(view);
-            }
-        });
+//        obrazek = findViewById(R.id.obrazePlyty);
     }
 
     public void panelDodaniaPlyty(View view) {
@@ -67,23 +58,23 @@ public class MainActivity extends AppCompatActivity implements KonwersjaZdjec {
         startActivity(new Intent(this, PanelStanu.class));
     }
 
-    public void getRestResponse(View view) {
-        final String strings = Wartosci.LISTA_WSZYSTKICH_PLYT;
-        ResponseEntity<Plyta[]> entity = null;
-        try {
-            entity = new RestService().execute(strings).get();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        byte[] arr = null;
-        List<Plyta> list = new ArrayList<>(Arrays.asList(entity.getBody()));
-        for (Plyta plyta : list) {
-            if (plyta.getObrazek() != null) {
-                obrazek.setImageBitmap(odkodujZdjecie(plyta.getObrazek()));
-                break;
-            }
-        }
-    }
+//    public void getRestResponse(View view) {
+//        final String strings = Wartosci.LISTA_WSZYSTKICH_PLYT;
+//        ResponseEntity<Plyta[]> entity = null;
+//        try {
+//            entity = new RestService().execute(strings).get();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        byte[] arr = null;
+//        List<Plyta> list = new ArrayList<>(Arrays.asList(entity.getBody()));
+//        for (Plyta plyta : list) {
+//            if (plyta.getObrazek() != null) {
+//                obrazek.setImageBitmap(odkodujZdjecie(plyta.getObrazek()));
+//                break;
+//            }
+//        }
+//    }
 
     @Override
     public String zakodujZdjecie(Bitmap zdjecie) {
