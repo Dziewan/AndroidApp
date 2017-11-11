@@ -1,6 +1,7 @@
 package com.example.dziewan.application.panele;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -74,6 +75,15 @@ public class PanelEdycjiPlyty extends PanelDodaniaPlyty implements KonwersjaZdje
                 zrobZdjecie(view);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap photo = (Bitmap) extras.get("data");
+            obrazekEdit.setImageBitmap(photo);
+        }
     }
 
     public void zapiszPlyte(View view) {
