@@ -55,6 +55,8 @@ public class PanelStanu extends AppCompatActivity {
         gruboscLabel = findViewById(R.id.textView7);
         regalLabel = findViewById(R.id.textView8);
 
+        // elo
+
         materialLabel.setTextColor(Color.BLACK);
         wymiarLabel.setTextColor(Color.BLACK);
         gruboscLabel.setTextColor(Color.BLACK);
