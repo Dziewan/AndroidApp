@@ -1,6 +1,7 @@
 package com.example.dziewan.application.panele;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,7 +98,7 @@ public class PanelStanu extends AppCompatActivity {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             final ViewHolder viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
@@ -107,40 +109,34 @@ public class PanelStanu extends AppCompatActivity {
                 viewHolder.grubosc = convertView.findViewById(R.id.gruboscView);
                 viewHolder.wymiar = convertView.findViewById(R.id.wymiarView);
                 viewHolder.miejsce = convertView.findViewById(R.id.miejsceView);
-
+                viewHolder.tableRow = convertView.findViewById(R.id.tableRow);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
+            viewHolder.tableRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), PanelEdycjiPlyty.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("ID", plytas.get(position).getId());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
             viewHolder.material.setText(plytas.get(position).getMaterial());
             viewHolder.grubosc.setText(""+plytas.get(position).getGrubosc());
             viewHolder.wymiar.setText(plytas.get(position).getWymiar());
             viewHolder.miejsce.setText(plytas.get(position).getMiejsce());
-
-            viewHolder.material.setOnClickListener(setInfo("Materiał", viewHolder.material.getText().toString()));
-            viewHolder.grubosc.setOnClickListener(setInfo("Grubość", viewHolder.grubosc.getText().toString()));
-            viewHolder.wymiar.setOnClickListener(setInfo("Wymiar", viewHolder.wymiar.getText().toString()));
-            viewHolder.miejsce.setOnClickListener(setInfo("Miejsce w regale", viewHolder.miejsce.getText().toString()));
 
             return convertView;
         }
     }
 
     public class ViewHolder {
-
         TextView material, wymiar, grubosc, miejsce;
         CheckBox zaznacz;
-    }
-
-    private View.OnClickListener setInfo(final String name, final String text) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast toast = Toast.makeText(getBaseContext(), name+":\n"+text, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-        };
+        TableRow tableRow;
     }
 }

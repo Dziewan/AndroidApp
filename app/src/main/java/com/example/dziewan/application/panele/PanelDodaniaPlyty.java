@@ -24,6 +24,8 @@ import com.example.dziewan.application.model.Wartosci;
 import com.example.dziewan.application.service.RestService;
 import com.example.dziewan.application.service.Walidacja;
 
+import org.springframework.http.HttpStatus;
+
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
@@ -79,7 +81,15 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
             plyta.setMiejsce(miejsce.getText().toString());
             plyta.setObrazek(zakodujZdjecie(((BitmapDrawable) obrazek.getDrawable()).getBitmap()));
 
-            new RestService(plyta).execute(Wartosci.LISTA_WSZYSTKICH_PLYT);
+            HttpStatus httpStatus = null;
+            try {
+                httpStatus = new RestService(plyta).execute(Wartosci.LISTA_WSZYSTKICH_PLYT).get().getStatusCode();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            if (HttpStatus.OK.equals(httpStatus)) {
+                Toast.makeText(this, "Płyta zapisana", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

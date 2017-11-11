@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:label="Dodaj płytę" android:name=".panele.PanelDodaniaPlyty"/>
-        <activity android:label="Usuń płytę" android:name=".panele.PanelEdytowaniaPlyty"/>
         <activity android:label="Stan" android:name=".panele.PanelStanu"/>
+        <activity android:label="Edycja" android:name=".panele.PanelEdycjiPlyty"/>
     </application>
 
 </manifest>

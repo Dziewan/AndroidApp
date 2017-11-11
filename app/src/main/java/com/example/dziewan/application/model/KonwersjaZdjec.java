@@ -10,6 +10,6 @@ public interface KonwersjaZdjec {
 
     String zakodujZdjecie(Bitmap zdjecie);
 
-    Bitmap odkodujZdjecie(String array);
+    Bitmap odkodujZdjecie(String nazwa);
 
 }

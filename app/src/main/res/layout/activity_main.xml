@@ -6,54 +6,30 @@
     android:layout_height="match_parent"
     tools:context="com.example.dziewan.application.MainActivity">
 
-    <ImageView
-        android:id="@+id/obrazePlyty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/dodawanie" />
-
     <ImageButton
         android:id="@+id/plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/minus"
-        android:layout_alignStart="@+id/minus"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/rownosc"
+        android:layout_marginTop="89dp"
+        android:background="@null"
         android:onClick="panelDodaniaPlyty"
-        app:srcCompat="@drawable/dodawanie"
+        app:srcCompat="@drawable/add"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="16dp" />
-
-    <ImageButton
-        android:id="@+id/minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rownosc"
-        android:layout_alignStart="@+id/rownosc"
-        android:layout_marginBottom="12dp"
-        android:adjustViewBounds="true"
-        android:onClick="panelUsuwaniaPlyty"
-        app:srcCompat="@drawable/minus"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="185dp" />
 
     <ImageButton
         android:id="@+id/rownosc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/plus"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="72dp"
+        android:background="@null"
         android:onClick="panelStanu"
-        app:srcCompat="@drawable/rownosc"
+        app:srcCompat="@drawable/documents"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="351dp" />
-
-    <Button
-        android:id="@+id/zaladuj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/plus"
-        android:text="Zaladuj zdjecie" />
 
 </RelativeLayout>

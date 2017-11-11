@@ -95,8 +95,9 @@
         android:id="@+id/dodaj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/miejsce"
-        android:layout_toEndOf="@+id/obrazek"
+        android:layout_marginEnd="12dp"
         android:text="Dodaj"
         tools:layout_editor_absoluteX="280dp"
         tools:layout_editor_absoluteY="433dp" />
@@ -105,9 +106,14 @@
         android:id="@+id/obrazek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxHeight="512px"
+        android:maxWidth="512px"
         android:layout_above="@+id/textView"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/dodawanie"
+        app:srcCompat="@drawable/camera"
+        android:background="@null"
         tools:layout_editor_absoluteX="216dp"
         tools:layout_editor_absoluteY="0dp" />
 
