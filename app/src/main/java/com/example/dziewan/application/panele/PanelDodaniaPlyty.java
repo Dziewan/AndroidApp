@@ -1,20 +1,25 @@
 package com.example.dziewan.application.panele;
 
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dziewan.application.R;
@@ -27,11 +32,14 @@ import com.example.dziewan.application.service.Walidacja;
 import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.net.URI;
 import java.util.List;
 
 public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdjec {
 
     public static final int REQUEST_CAPTURE = 1;
+    private Uri imageUri;
 
     Button dodaj;
     ImageButton obrazek;
@@ -98,16 +106,49 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
     }
 
     public void zrobZdjecie(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        File photo = null;
+        try {
+            photo = this.createTemporaryFile("picture", ".jpg");
+            photo.delete();
+        } catch(Exception e) {
+            Log.v("BLAD", "Can't create file to take picture!");
+            Toast.makeText(this, "Please check SD card! Image shot is impossible!", Toast.LENGTH_SHORT).show();
+        }
+        imageUri = Uri.fromFile(photo);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, REQUEST_CAPTURE);
+    }
+
+    private File createTemporaryFile(String part, String ext) throws Exception {
+        File tempDir= Environment.getExternalStorageDirectory();
+        tempDir=new File(tempDir.getAbsolutePath()+"/.temp/");
+        if(!tempDir.exists()) {
+            tempDir.mkdirs();
+        }
+        return File.createTempFile(part, ext, tempDir);
+    }
+
+    public void grabImage(ImageView imageView) {
+        this.getContentResolver().notifyChange(imageUri, null);
+        ContentResolver cr = this.getContentResolver();
+        Bitmap bitmap;
+        try {
+            bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, imageUri);
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT).show();
+            Log.d("BLAD", "Failed to load", e);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap photo = (Bitmap) extras.get("data");
-            obrazek.setImageBitmap(photo);
+//            Bundle extras = data.getExtras();
+//            Bitmap photo = (Bitmap) extras.get("data");
+            this.grabImage(obrazek);
+
         }
     }
 

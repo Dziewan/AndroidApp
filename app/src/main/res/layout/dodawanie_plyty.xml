@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,43 +11,49 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/material"
-        android:layout_alignParentStart="true"
-        android:text=" Materiał"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="129dp" />
+        android:layout_below="@+id/obrazek"
+        android:layout_marginStart="8dp"
+        android:text="Materiał"
+        app:layout_constraintBottom_toTopOf="@+id/material"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/wymiar"
+        android:layout_alignStart="@+id/wymiar"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:text="Wymiar"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="217dp" />
+        app:layout_constraintBottom_toTopOf="@+id/wymiar"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/wymiar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_above="@+id/grubosc"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="244dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -55,66 +61,88 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/textView"
         android:layout_below="@+id/wymiar"
+        android:layout_marginBottom="8dp"
         android:text="Grubość"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="290dp" />
+        app:layout_constraintBottom_toTopOf="@+id/grubosc"
+        app:layout_constraintStart_toStartOf="@+id/wymiar" />
 
-    <EditText
-        android:id="@+id/miejsce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="309dp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_below="@+id/grubosc"
-        android:text="Miejsce w regale"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="368dp" />
 
     <EditText
         android:id="@+id/grubosc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/dodaj"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="number|numberSigned|numberDecimal"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="399dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_below="@+id/grubosc"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Miejsce w regale"
+        app:layout_constraintBottom_toTopOf="@+id/miejsce"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/miejsce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/dodaj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/miejsce"
-        android:layout_marginEnd="12dp"
+        android:layout_alignBottom="@+id/miejsce"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/obrazek"
         android:text="Dodaj"
-        tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="433dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/miejsce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/miejsce"
+        app:layout_constraintTop_toTopOf="@+id/miejsce" />
 
     <ImageButton
         android:id="@+id/obrazek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxHeight="512px"
-        android:maxWidth="512px"
-        android:layout_above="@+id/textView"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/camera"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
         android:background="@null"
-        tools:layout_editor_absoluteX="216dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:maxHeight="180dp"
+        android:maxWidth="256dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/camera" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
