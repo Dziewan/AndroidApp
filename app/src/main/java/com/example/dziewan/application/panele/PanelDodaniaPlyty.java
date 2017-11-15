@@ -44,6 +44,7 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
     Button dodaj;
     ImageButton obrazek;
     EditText material, grubosc, wymiar, miejsce;
+    Boolean haveImage = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,11 +88,12 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
             plyta.setWymiar(wymiar.getText().toString());
             plyta.setGrubosc(Double.valueOf(grubosc.getText().toString()));
             plyta.setMiejsce(miejsce.getText().toString());
-            plyta.setObrazek(zakodujZdjecie(((BitmapDrawable) obrazek.getDrawable()).getBitmap()));
+            plyta.setObrazek(haveImage);
 
+            byte[] array = zakoduj(((BitmapDrawable) obrazek.getDrawable()).getBitmap());
             HttpStatus httpStatus = null;
             try {
-                httpStatus = new RestService(plyta).execute(Wartosci.LISTA_WSZYSTKICH_PLYT).get().getStatusCode();
+                httpStatus = new RestService(plyta, array, Wartosci.DODAJ_NOWA_PLYTE).execute(Wartosci.LISTA_WSZYSTKICH_PLYT).get().getStatusCode();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -148,7 +150,7 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
 //            Bundle extras = data.getExtras();
 //            Bitmap photo = (Bitmap) extras.get("data");
             this.grabImage(obrazek);
-
+            haveImage = true;
         }
     }
 
@@ -159,6 +161,18 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
         return imageEncoded;
+    }
+
+    @Override
+    public byte[] zakoduj(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    @Override
+    public Bitmap odkoduj(byte[] array) {
+        return BitmapFactory.decodeByteArray(array, 0, array.length);
     }
 
     @Override

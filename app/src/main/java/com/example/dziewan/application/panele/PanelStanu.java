@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dziewan.application.R;
+import com.example.dziewan.application.model.ExtendedPlyta;
 import com.example.dziewan.application.model.KonwersjaZdjec;
 import com.example.dziewan.application.model.Plyta;
 import com.example.dziewan.application.model.Wartosci;
@@ -65,14 +66,13 @@ public class PanelStanu extends AppCompatActivity {
         stanMagazynu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Plyta[] plyty = null;
+                List<Plyta> plyty = null;
                 try {
-                    plyty = new RestService().execute(Wartosci.LISTA_WSZYSTKICH_PLYT).get().getBody();
+                    plyty = (List<Plyta>) new RestService(Wartosci.ZNAJDZ_WSZYSTKIE).execute(Wartosci.LISTA_WSZYSTKICH_PLYT).get().getBody();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                List<Plyta> plytas = new ArrayList<>(Arrays.asList(plyty));
-                listaPlyt.setAdapter(new AdapterStanu(getBaseContext(), R.layout.layout_plyty, plytas));
+                listaPlyt.setAdapter(new AdapterStanu(getBaseContext(), R.layout.layout_plyty, plyty));
             }
         });
     }

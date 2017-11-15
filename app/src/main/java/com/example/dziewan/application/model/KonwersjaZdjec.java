@@ -12,4 +12,8 @@ public interface KonwersjaZdjec {
 
     Bitmap odkodujZdjecie(String nazwa);
 
+    byte[] zakoduj(Bitmap bitmap);
+
+    Bitmap odkoduj(byte[] array);
+
 }

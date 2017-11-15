@@ -10,9 +10,6 @@ public class Plyta {
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("image")
-    private String obrazek;
-
     @JsonProperty("name")
     private String nazwaPlyty;
 
@@ -28,6 +25,9 @@ public class Plyta {
     @JsonProperty("thickness")
     private Double grubosc;
 
+    @JsonProperty("obrazek")
+    private Boolean obrazek;
+
     @Override
     public String toString() {
         return "id: "+id+" "+" material: "+material+" wymiar: "+wymiar;
@@ -39,14 +39,6 @@ public class Plyta {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getObrazek() {
-        return obrazek;
-    }
-
-    public void setObrazek(String obrazek) {
-        this.obrazek = obrazek;
     }
 
     public String getNazwaPlyty() {
@@ -87,5 +79,13 @@ public class Plyta {
 
     public void setGrubosc(Double grubosc) {
         this.grubosc = grubosc;
+    }
+
+    public Boolean getObrazek() {
+        return obrazek;
+    }
+
+    public void setObrazek(Boolean obrazek) {
+        this.obrazek = obrazek;
     }
 }
