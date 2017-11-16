@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -22,6 +23,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.dziewan.application.BuildConfig;
+import com.example.dziewan.application.MainActivity;
 import com.example.dziewan.application.R;
 import com.example.dziewan.application.model.KonwersjaZdjec;
 import com.example.dziewan.application.model.Plyta;
@@ -99,6 +102,8 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
             }
             if (HttpStatus.CREATED.equals(httpStatus)) {
                 Toast.makeText(this, "Płyta zapisana", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Nie udało się dodać płyty", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -117,7 +122,7 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
             Log.v("BLAD", "Can't create file to take picture!");
             Toast.makeText(this, "Please check SD card! Image shot is impossible!", Toast.LENGTH_SHORT).show();
         }
-        imageUri = Uri.fromFile(photo);
+        imageUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", photo);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, REQUEST_CAPTURE);
     }
@@ -147,8 +152,6 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CAPTURE && resultCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap photo = (Bitmap) extras.get("data");
             this.grabImage(obrazek);
             haveImage = true;
         }

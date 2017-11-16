@@ -62,7 +62,7 @@ public class PanelEdycjiPlyty extends PanelDodaniaPlyty implements KonwersjaZdje
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        if (plyta.getObraz() != null) obrazekEdit.setImageBitmap(odkoduj(plyta.getObraz()));
+        if (plyta.getObrazek() != null) obrazekEdit.setImageBitmap(odkoduj(plyta.getObrazek()));
         materialEdit.setText(plyta.getPlyta().getMaterial());
         wymiarEdit.setText(plyta.getPlyta().getWymiar());
         gruboscEdit.setText(plyta.getPlyta().getGrubosc()+"");
@@ -83,9 +83,7 @@ public class PanelEdycjiPlyty extends PanelDodaniaPlyty implements KonwersjaZdje
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap photo = (Bitmap) extras.get("data");
-            obrazekEdit.setImageBitmap(photo);
+            grabImage(obrazekEdit);
             haveImage = true;
         }
     }
@@ -103,14 +101,14 @@ public class PanelEdycjiPlyty extends PanelDodaniaPlyty implements KonwersjaZdje
             plyta.setMiejsce(miejsceEdit.getText().toString());
             plyta.setObrazek(haveImage);
 
-            byte[] array = zakoduj(((BitmapDrawable) obrazek.getDrawable()).getBitmap());
+            byte[] array = zakoduj(((BitmapDrawable) obrazekEdit.getDrawable()).getBitmap());
             HttpStatus httpStatus = null;
             try {
                 httpStatus = new RestService(plyta, array, Wartosci.DODAJ_NOWA_PLYTE).execute(Wartosci.LISTA_WSZYSTKICH_PLYT+"/"+ID).get().getStatusCode();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            if (HttpStatus.OK.equals(httpStatus)) {
+            if (HttpStatus.CREATED.equals(httpStatus)) {
                 Toast.makeText(this, "Płyta zapisana", Toast.LENGTH_LONG).show();
             }
         }

@@ -10,22 +10,22 @@ public class ExtendedPlyta implements Serializable {
 
     private Plyta plyta;
 
-    private byte[] obraz;
+    private byte[] obrazek;
 
     public ExtendedPlyta(Plyta plyta, byte[] obrazek) {
         this.plyta = plyta;
-        this.obraz = obrazek;
+        this.obrazek = obrazek;
     }
 
     public ExtendedPlyta() {
     }
 
-    public byte[] getObraz() {
-        return obraz;
+    public byte[] getObrazek() {
+        return obrazek;
     }
 
     public void setObrazek(byte[] obrazek) {
-        this.obraz = obrazek;
+        this.obrazek = obrazek;
     }
 
     public Plyta getPlyta() {
