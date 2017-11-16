@@ -8,10 +8,6 @@ import android.graphics.Bitmap;
 
 public interface KonwersjaZdjec {
 
-    String zakodujZdjecie(Bitmap zdjecie);
-
-    Bitmap odkodujZdjecie(String nazwa);
-
     byte[] zakoduj(Bitmap bitmap);
 
     Bitmap odkoduj(byte[] array);

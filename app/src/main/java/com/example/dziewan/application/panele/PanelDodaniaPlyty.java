@@ -97,7 +97,7 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            if (HttpStatus.OK.equals(httpStatus)) {
+            if (HttpStatus.CREATED.equals(httpStatus)) {
                 Toast.makeText(this, "Płyta zapisana", Toast.LENGTH_LONG).show();
             }
         }
@@ -155,15 +155,6 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
     }
 
     @Override
-    public String zakodujZdjecie(Bitmap zdjecie) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        zdjecie.compress(Bitmap.CompressFormat.PNG, 90, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
-    }
-
-    @Override
     public byte[] zakoduj(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
@@ -173,11 +164,5 @@ public class PanelDodaniaPlyty extends AppCompatActivity implements KonwersjaZdj
     @Override
     public Bitmap odkoduj(byte[] array) {
         return BitmapFactory.decodeByteArray(array, 0, array.length);
-    }
-
-    @Override
-    public Bitmap odkodujZdjecie(String array) {
-        byte[] decodedByte = Base64.decode(array, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0,      decodedByte.length);
     }
 }
